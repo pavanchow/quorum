@@ -1,0 +1,20 @@
+[package]
+name = "quorum"
+version = "0.1.0"
+edition = "2021"
+description = "A deterministic Raft consensus simulator"
+authors = ["Pavan Nallamothu"]
+
+[[bin]]
+name = "quorum"
+path = "src/main.rs"
+
+[lib]
+name = "quorum"
+path = "src/lib.rs"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+
+[profile.release]
+opt-level = 3
