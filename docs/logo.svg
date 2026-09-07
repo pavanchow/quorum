@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Quorum logo">
+  <defs>
+    <linearGradient id="qr-g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5b5bd6"/>
+      <stop offset="1" stop-color="#8b8bf0"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="124" height="124" rx="28" fill="url(#qr-g)"/>
+  <g stroke="#ffffff" stroke-width="4" stroke-linecap="round">
+    <line x1="64" y1="64" x2="64" y2="30"/>
+    <line x1="64" y1="64" x2="96.3" y2="53.5"/>
+    <line x1="64" y1="64" x2="84" y2="91.5"/>
+    <line x1="64" y1="64" x2="44" y2="91.5"/>
+    <line x1="64" y1="64" x2="31.7" y2="53.5"/>
+  </g>
+  <g fill="#ffffff">
+    <circle cx="64" cy="30" r="8"/>
+    <circle cx="84" cy="91.5" r="8"/>
+    <circle cx="44" cy="91.5" r="8"/>
+  </g>
+  <g fill="url(#qr-g)" stroke="#ffffff" stroke-width="4">
+    <circle cx="96.3" cy="53.5" r="7"/>
+    <circle cx="31.7" cy="53.5" r="7"/>
+  </g>
+  <circle cx="64" cy="64" r="12" fill="#ffffff"/>
+  <path d="M58.5 64 l4 4 l7 -8" fill="none" stroke="#5b5bd6" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

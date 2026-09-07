@@ -1,3 +1,5 @@
+<img src="docs/logo.svg" alt="Quorum logo" width="96">
+
 # Quorum
 
 **Raft consensus in Rust, deterministic down to the last tick.**

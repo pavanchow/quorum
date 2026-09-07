@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Quorum: Raft consensus in Rust, running live in your browser</title>
+<link rel="icon" type="image/svg+xml" href="logo.svg">
 <meta name="description" content="Quorum is a from-scratch, deterministic Raft consensus in Rust simulator. Watch leader election, terms, and log replication converge in a seeded, step-by-step cluster simulation, no real network involved. By Pavan Nallamothu (pavanchow).">
 <meta name="author" content="Pavan Nallamothu (pavanchow)">
 <meta name="keywords" content="Raft consensus, Rust, distributed systems, leader election, log replication, consensus simulator, Pavan Nallamothu, pavanchow">
@@ -143,6 +144,7 @@
   </div></nav>
 
   <div class="hero">
+    <img src="logo.svg" alt="Quorum logo" width="72" height="72" style="display:block;margin:0 auto 18px">
     <p class="eyebrow">Rust &middot; deterministic simulation &middot; no real network</p>
     <h1>Watch a cluster<br>agree, one tick at a time.</h1>
     <p class="sub">Quorum is a from-scratch Raft consensus in Rust simulator. A candidate wins a majority, becomes leader, and replicates a log until most of the cluster holds it. Every timeout is seeded, every step is explicit, and the run below is the real state machine, not a canned animation.</p>
@@ -170,6 +172,14 @@
       <p class="caption">runs the real election and replication state machine, client-side, no server, no CDN. Kill a node to force a re-election live.</p>
     </div>
   </div>
+
+  <details style="max-width:820px;margin:0 auto 8px;border:1px solid var(--line);border-radius:14px;padding:16px 22px;background:var(--accent-soft)">
+    <summary style="cursor:pointer;font-weight:600">How to use this playground</summary>
+    <div style="margin-top:12px">
+      <p><b>Step</b> advances the simulation one tick, delivering pending messages and firing any timers that are due. <b>Play</b> steps automatically until you pause. Each node card shows its role (follower, candidate, or leader), current term, and log.</p>
+      <p style="margin-top:10px"><b>Client request</b> hands a new entry to the current leader so you can watch it replicate out to a majority and commit. <b>Reset</b> starts a fresh cluster. Try clicking a node to kill it once a leader is elected, then keep stepping to watch the survivors run a re-election. Same seed, same trace, every time.</p>
+    </div>
+  </details>
 
   <section id="how">
     <h2>The four rules that make it safe.</h2>
