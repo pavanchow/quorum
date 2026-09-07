@@ -24,6 +24,8 @@
   "name": "Quorum",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Cross-platform",
+  "softwareVersion": "0.1.0",
+  "license": "https://opensource.org/licenses/MIT",
   "description": "Quorum is a from-scratch, deterministic Raft consensus in Rust simulator with leader election, terms, and log replication over a seeded, steppable message bus.",
   "author": { "@type": "Person", "name": "Pavan Nallamothu" },
   "url": "https://pavanchow.github.io/quorum/",
@@ -57,6 +59,7 @@
   nav .brand .gem{width:16px;height:16px;transform:rotate(45deg);border-radius:3px;background:linear-gradient(135deg,#9a9af4,#5b5bd6)}
   nav .links{display:flex;gap:26px;align-items:center}
   nav .links a{color:var(--ink);font-size:14.5px}
+  nav .links .v{color:var(--faint);font-family:var(--mono);font-size:12px}
   @media(max-width:640px){nav .links a:not(.gh){display:none}}
 
   .hero{padding:70px 0 30px;text-align:center}
@@ -138,8 +141,9 @@
   <nav><div class="row">
     <div class="brand"><img src="logo.svg" class="brandlogo" alt="" width="22" height="22">Quorum</div>
     <div class="links">
-      <a href="#demo">Demo</a><a href="#how">How it works</a><a href="#source">Source</a>
+      <a href="#demo">Demo</a><a href="#how">How it works</a><a href="#different">Why</a><a href="#source">CLI</a>
       <a class="gh" href="https://github.com/pavanchow/quorum">GitHub</a>
+      <span class="v">v0.1.0</span>
     </div>
   </div></nav>
 
@@ -192,6 +196,17 @@
     </div>
   </section>
 
+  <section id="different">
+    <h2>Consensus you can replay.</h2>
+    <p class="lead">Most ways to learn Raft are either a real cluster you cannot pause or an animation that is not the real algorithm. Quorum is the deterministic middle.</p>
+    <div class="rows">
+      <div class="r"><b>Deterministic by construction</b><p>Same seed and same sequence of calls, same trace, every time. A strange outcome is never a fluke you cannot get back, it is reproducible down to the tick.</p></div>
+      <div class="r"><b>No wall clock, no real network</b><p>A tiny seeded xorshift64* generator drives every election timeout, and messages ride an in-simulation bus with explicit delivery ticks. Nothing depends on the system clock or a socket.</p></div>
+      <div class="r"><b>Steppable, not animated</b><p>Advance one tick at a time and watch pending messages deliver and timers fire. The browser demo and the CLI run the same state machine, not a canned recording.</p></div>
+      <div class="r"><b>Typed, no panics</b><p>The three roles, terms, votes, and the replicated log are typed throughout, and the library code does not panic. A run ends in a state you can inspect, not a crash.</p></div>
+    </div>
+  </section>
+
   <section>
     <p class="eyebrow" style="text-align:center">What the simulation steps through</p>
     <h2 style="margin-top:18px">Three phases, in order, every run.</h2>
@@ -211,10 +226,26 @@ if count &gt;= quorum &amp;&amp; log[idx - 1].term == current_term {
 
   <section id="source">
     <h2>Try it from the CLI.</h2>
-    <p class="lead">The same state machine, without a browser.</p>
-    <pre>cargo run -- run --nodes 5 --steps 2000
-<span class="c">elected leader: node 3 (term 1, log length 3)
-committed entries (3): ...</span></pre>
+    <p class="lead">The same state machine, without a browser. Real output from the default seed.</p>
+    <pre><span class="c">$ cargo run -- run --nodes 5 --steps 2000</span>
+
+elected leader: node 3 (term 1, log length 3)
+committed entries (3):
+  1: term 1 -&gt; set x=1
+  2: term 1 -&gt; set y=2
+  3: term 1 -&gt; set z=3
+
+cluster state:
+  node 0: follower  term 1    log 3   commit 3   [up]
+  node 1: follower  term 1    log 3   commit 3   [up]
+  node 2: follower  term 1    log 3   commit 3   [up]
+  node 3: leader    term 1    log 3   commit 3   [up]
+  node 4: follower  term 1    log 3   commit 3   [up]</pre>
+    <div class="rows" style="margin-top:48px">
+      <div class="r"><b>CLI</b><p>Run a whole cluster to convergence with <code>quorum run --nodes 5 --steps 2000</code>. The elected leader, committed log, per-node state, and event trace print out. <code>--nodes</code>, <code>--steps</code>, and <code>--seed</code> are all configurable.</p></div>
+      <div class="r"><b>Test suite</b><p><code>cargo test</code> runs the deterministic checks: exactly one leader is elected, an entry commits once a majority replicates it, a stale-log candidate cannot win, a higher term forces a step down, and a split vote resolves in a later term.</p></div>
+      <div class="r"><b>Library</b><p>The node model, message bus, and seeded generator live in a plain Rust library, so the exact same simulation drives both the CLI and this in-browser port.</p></div>
+    </div>
   </section>
 
   <noscript>
