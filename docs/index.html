@@ -16,6 +16,8 @@
 <meta property="og:url" content="https://pavanchow.github.io/quorum/">
 <meta property="og:site_name" content="Quorum">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Quorum: Raft consensus in Rust, running live in your browser">
+<meta name="twitter:description" content="A deterministic Raft consensus in Rust simulator. Watch a cluster elect a leader and replicate a log, step by step, with no real network.">
 
 <script type="application/ld+json">
 {
@@ -131,6 +133,29 @@
 
   footer{padding:64px 0;border-top:1px solid var(--line);text-align:center;color:var(--muted)}
   footer .name{color:var(--ink);font-weight:600}
+
+  /* Dark overrides. Placed at the end so element rules (nav, card, buttons)
+     that appear earlier are beaten on source order, and the var overrides
+     recolor everything that reads through custom properties. */
+  @media(prefers-color-scheme:dark){
+    :root{
+      --accent:#8b8bf0;--accent-soft:#20213f;
+      --ink:#f2f2f7;--muted:#a2a5b2;--faint:#70737f;
+      --line:#2a2a30;--panel:#161619;--panel2:#131316;
+      --leader:#3ecf7f;--leader-soft:#123524;
+      --candidate:#e0b23a;--candidate-soft:#3a2f12;
+      --follower:#9a9af4;--follower-soft:#22223f;
+      --dead:#f0803a;--dead-soft:#3a2212;
+    }
+    body{background:#0b0b0d}
+    nav{background:rgba(11,11,13,.82);border-bottom-color:var(--line)}
+    .card{background:linear-gradient(180deg,#161620,#121218);box-shadow:0 1px 0 rgba(255,255,255,.03) inset,0 18px 50px -30px rgba(0,0,0,.6)}
+    .demo button.op{background:var(--panel2);color:var(--ink);border-color:var(--line)}
+    .demo button.op.go{background:var(--accent);color:#0b0b0d;border-color:var(--accent)}
+    .node .killbtn{background:var(--panel2);color:var(--muted);border-color:var(--line)}
+    .btn.p{background:var(--ink);color:var(--panel2)}
+    pre{background:#08080a}
+  }
 </style>
 <link rel="author" href="https://github.com/pavanchow">
 <script type="application/ld+json">

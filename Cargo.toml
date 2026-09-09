@@ -4,6 +4,8 @@ version = "0.1.0"
 edition = "2021"
 description = "A deterministic Raft consensus simulator"
 authors = ["Pavan Nallamothu"]
+license = "MIT"
+repository = "https://github.com/pavanchow/quorum"
 
 [[bin]]
 name = "quorum"
