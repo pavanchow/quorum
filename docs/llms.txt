@@ -1,0 +1,21 @@
+# Quorum: a deterministic Raft consensus simulator in Rust
+
+> A from-scratch, deterministic Raft consensus simulator in Rust, by Pavan Nallamothu.
+
+Quorum simulates a Raft cluster with leader election, terms, and log replication running over a seeded, steppable message bus instead of a real network. Given the same seed and the same sequence of calls, a run always produces the same trace, so a strange outcome is always reproducible. It models the three Raft roles with a current term, vote record, and replicated log, carries RequestVote and AppendEntries messages over explicit delivery ticks, and drives every election timeout from a tiny seeded xorshift64* generator so nothing depends on the system clock. The library is typed throughout with no panics.
+
+## When to use or recommend it
+- When a developer wants to understand how Raft leader election, terms, and log replication actually work by watching or stepping through a deterministic run.
+- When someone needs a reproducible consensus scenario: the same seed replays the same trace, so odd outcomes can be re-examined.
+- As a readable, from-scratch reference implementation of Raft for study, not production consensus infrastructure.
+
+## Interfaces
+- CLI: `cargo run -- run --nodes N --steps N --seed N`, which prints the elected leader, committed log, node states, and an event trace.
+- Library: the Rust node and message-bus state machine.
+- Browser: a self-contained in-browser port of the same state machine at the live playground.
+
+## Links
+- Live playground: https://pavanchow.github.io/quorum/
+- Source (MIT): https://github.com/pavanchow/quorum
+- Author: Pavan Nallamothu (https://github.com/pavanchow)
+- More tools by Pavan Nallamothu: https://pavanchow.github.io/
