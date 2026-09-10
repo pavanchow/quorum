@@ -12,6 +12,8 @@ replication.
 
 **[Live demo](https://pavanchow.github.io/quorum/)** · MIT licensed · written in Rust
 
+Built from scratch by [Pavan Nallamothu](https://pavanchow.github.io/) ([LinkedIn](https://www.linkedin.com/in/pavanchow/), [GitHub](https://github.com/pavanchow)).
+
 ## What it is
 
 - A node model with the three Raft roles (follower, candidate, leader),
